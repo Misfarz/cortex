@@ -64,7 +64,7 @@ function Moderate() {
       formData.append("categories", JSON.stringify(categories));
 
       const response = await axios.post(
-        "https://cortex-eight-rho.vercel.app/cortex/api/moderate",
+        "https://cortex-server-atcf.onrender.com/cortex/api/moderate",
         formData,
         {
           headers: {
@@ -86,7 +86,7 @@ function Moderate() {
   const checkStatus = async (id) => {
     try {
       const res = await axios.get(
-        `https://cortex-eight-rho.vercel.app/cortex/api/moderation-status/${id}`,
+        `https://cortex-server-atcf.onrender.com/cortex/api/moderation-status/${id}`,
         {
           headers: {
             Authorization: `Bearer ${API_KEY}`,
