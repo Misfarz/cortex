@@ -7,7 +7,7 @@ formData.append("image", file);
 formData.append("categories", JSON.stringify(["product", "fashion"]));
 
 const response = await axios.post(
-  "http://localhost:3000/cortex/api/moderate",
+  "https://cortex-server-atcf.onrender.com/cortex/api/moderate",
   formData,
   {
     headers: {
@@ -18,7 +18,7 @@ const response = await axios.post(
 
 console.log(response.data);`;
 
-  const curlExample = `curl -X POST http://localhost:3000/cortex/api/moderate \\
+  const curlExample = `curl -X POST https://cortex-server-atcf.onrender.com/cortex/api/moderate \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -F "image=@image.jpg" \\
   -F 'categories=["product","fashion"]'`;
