@@ -169,7 +169,7 @@ const result = await imgModerate.withTags(image, {
           <GoogleLogin
             onSuccess={async (credentialResponse) => {
               const res = await axios.post(
-                `${VITE_API_URL}`,
+                 "http://localhost:3000/cortex/api/google",
                 {
                   token: credentialResponse.credential,
                 }
