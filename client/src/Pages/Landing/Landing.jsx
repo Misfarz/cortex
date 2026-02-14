@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+
 import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { 
@@ -19,6 +20,8 @@ import {
   Eye,
   AlertTriangle
 } from 'lucide-react';
+
+const VITE_API_URL = import.meta.env.VITE_API_URL;
 
 function Landing() {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
@@ -166,7 +169,7 @@ const result = await imgModerate.withTags(image, {
           <GoogleLogin
             onSuccess={async (credentialResponse) => {
               const res = await axios.post(
-                `${import.meta.env.VITE_API_URL}/google`,
+                `${VITE_API_URL}`,
                 {
                   token: credentialResponse.credential,
                 }
