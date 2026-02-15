@@ -64,7 +64,7 @@ function Moderate() {
       formData.append("categories", JSON.stringify(categories));
 
       const response = await axios.post(
-        "/moderate",
+        "http://localhost:3000/cortex/api/moderate",
         formData,
         {
           headers: {
@@ -86,7 +86,7 @@ function Moderate() {
   const checkStatus = async (id) => {
     try {
       const res = await axios.get(
-        `/moderation-status/${id}`,
+        `http://localhost:3000/cortex/api/moderation-status/${id}`,
         {
           headers: {
             Authorization: `Bearer ${API_KEY}`,

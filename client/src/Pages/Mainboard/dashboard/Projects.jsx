@@ -14,12 +14,13 @@ import { createProjectApi, getProjectsApi } from "../../../api/ProjectApi";
 import { toast } from "react-hot-toast";
 
 function Projects() {
-  const navigate = useNavigate();
+
 
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [projectName, setProjectName] = useState("");
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [creating, setCreating] = useState(false);
 
   /* ---------------- ACTION ICONS ---------------- */
 
@@ -52,6 +53,7 @@ function Projects() {
 
   const handleCreateProject = async () => {
     try {
+      setCreating(true);
       const res = await createProjectApi({
         name: projectName,
       });
@@ -63,9 +65,12 @@ function Projects() {
 
       await fetchProjects();
     } catch (err) {
+      console.error("Project creation error:", err);
       toast.error(
         err.response?.data?.message || "Failed to create project"
       );
+    } finally {
+      setCreating(false);
     }
   };
 
@@ -219,11 +224,18 @@ function Projects() {
                 </button>
 
                 <button
-                  className="px-4 py-2 bg-blue-600 rounded-lg text-white hover:bg-blue-700 disabled:opacity-50"
+                  className="px-4 py-2 bg-blue-600 rounded-lg text-white hover:bg-blue-700 disabled:opacity-50 flex items-center gap-2"
                   onClick={handleCreateProject}
-                  disabled={!projectName.trim()}
+                  disabled={!projectName.trim() || creating}
                 >
-                  Create Project
+                  {creating ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      Creating...
+                    </>
+                  ) : (
+                    "Create Project"
+                  )}
                 </button>
               </div>
             </div>
